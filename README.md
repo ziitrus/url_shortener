@@ -20,7 +20,7 @@ cd url-shortener
 
 1. Créez un fichier `.env` à la racine du projet avec les variables d'environnement nécessaires :
 ```env
-DATABASE_URL="postgresql://user:password@localhost:5432/urlshortener"
+DATABASE_URL="postgresql://user:password@postgres:5432/urlshortener"
 REDIS_URL="redis://localhost:6379"
 PORT=3000
 
