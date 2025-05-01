@@ -12,7 +12,7 @@ Un service de raccourcissement d'URL développé avec Node.js, Express, TypeScri
 
 1. Clonez le dépôt :
 ```bash
-git clone <votre-repo>
+git clone git@github.com:ziitrus/url_shortener.git
 cd url-shortener
 ```
 
