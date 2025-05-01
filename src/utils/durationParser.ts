@@ -10,12 +10,10 @@ type TimeUnit = {
   };
   
   export function parseExpirationDate(duration: string): Date | null {
-    // Vérifier si la durée est au bon format
     if (!duration || typeof duration !== 'string') {
       return null;
     }
   
-    // Parcourir toutes les unités de temps possibles
     for (const [unit, { regex, multiplier }] of Object.entries(TIME_UNITS)) {
       const match = duration.match(regex);
       if (match) {
@@ -23,8 +21,6 @@ type TimeUnit = {
         if (isNaN(value) || value <= 0) {
           return null;
         }
-        
-        // Calculer la date d'expiration
         const now = new Date();
         const expirationDate = new Date(now.getTime() + (value * multiplier));
         
@@ -35,7 +31,6 @@ type TimeUnit = {
     return null;
   }
   
-  // La fonction de validation reste la même
   export function isValidDurationFormat(duration: string): boolean {
     if (!duration) return false;
     

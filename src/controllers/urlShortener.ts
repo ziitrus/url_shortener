@@ -12,11 +12,8 @@ import { parseExpirationDate } from "../utils/durationParser"
 
 const shorten = async (req: Request, res: Response) => {
     const {url, expiration} = req.body
-
     const expireDate = expiration ? parseExpirationDate(expiration) : null;
-
     const newShortUrl = await shortenUrl(url, generateShortId(), expireDate)
-
     res.send(newShortUrl)
 }
 const getShort = async (req: Request, res: Response) => {

@@ -6,9 +6,7 @@ import {
 const listener = cache
 
 async function analyticsWorker() {
-    console.log('worker starting')
     listener.subscribe('clicks', (err) => {
-        console.log('subscribed')
         if (err) {
             console.log("subscriber down")
             return
@@ -18,9 +16,8 @@ async function analyticsWorker() {
     listener.on('message', async (channel, shortCode) => {
         try {
             await getShortUrl(shortCode)
-            console.log('ONE MORE CLICK', shortCode)
         } catch(e) {
-            console.log('oopsy')
+            console.log('Count failed')
         }
     })
 }

@@ -12,7 +12,6 @@ import { parse } from "path"
 export const checkUrlCache = async (req: Request, res: Response, next: NextFunction) => {
     const { shortCode } = req.params
     try {
-        // if key exist send key to user
         const key = await cache.get(shortCode)
         if (key === null) {
             next()
@@ -25,7 +24,6 @@ export const checkUrlCache = async (req: Request, res: Response, next: NextFunct
 
     } catch(e) {
         console.log('dont find')
-        // if key not exist go to the next middleware which is db Check
         next()
     }
 }
