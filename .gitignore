@@ -1,0 +1,13 @@
+# Prisma
+node_modules
+dist
+.env
+prisma/.env
+prisma/migrations/*/
+prisma/generated/
+.prisma/
+src/generated/
+
+# Autres fichiers générés
+*.log
+.DS_Store

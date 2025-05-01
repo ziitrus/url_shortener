@@ -1,0 +1,56 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    command: >
+      sh -c "cd /app &&
+             npm install &&
+             npx prisma migrate dev --name init
+             npx prisma generate &&
+             sleep 2 &&          # Petit délai pour s'assurer que le client est généré
+             npm run dev"
+    depends_on:
+      - postgres
+      - redis
+  redis:
+    image: redis:7.4.3
+    restart: always
+    volumes:
+      - cache:/data
+    command: redis-server --save 20 1 --loglevel warning
+  postgres:
+   image: postgres:17.4
+   restart: always
+   env_file: .env
+   ports:
+    - 5432:5432
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    command: >
+      sh -c "cd /app &&
+             npm install &&
+             npx prisma migrate dev --name init
+             npx prisma generate &&
+             sleep 2 &&          # Petit délai pour s'assurer que le client est généré
+             npx nodemon src/workers/analytics.ts"
+    depends_on:
+      - postgres
+      - redis
+      - api
+
+volumes:
+  cache:
+
