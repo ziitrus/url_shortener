@@ -56,3 +56,25 @@ La documentation Swagger de l'API est disponible à l'adresse :
 - PostgreSQL
 - Swagger (Documentation API)
 - Docker & Docker Compose
+
+## CURL TESTING
+
+### POST: /shorten
+```
+curl -X POST http://localhost:3000/shorten \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://www.example.com/very-long-url",
+    "expiration": "24h"
+  }'
+```
+
+### GET /analytics/:shortCode
+```
+curl -X GET http://localhost:3000/analytics/{shortCode}
+```
+
+### GET /:shortCode
+```
+curl -X GET -L http://localhost:3000/{shortCode}
+```
